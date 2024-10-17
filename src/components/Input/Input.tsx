@@ -1,13 +1,14 @@
 import React, { useId } from "react";
-import "./button.css";
+import "./input.css";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   /**  label for the input */
-  label: string;
+  label: React.ReactNode;
   /**  value of input, not needed because we're extending HTMLInputElementbut but added for clarity */
-  value: string;
+  value?: string;
   /**  callback for when user types */
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -19,8 +20,16 @@ export const Input = ({ label, onChange, value, ...props }: InputProps) => {
 
   return (
     <>
-      <label htmlFor={id}>{label}:</label>
-      <input id={id} value={value} onChange={onChange} {...props} />
+      <label htmlFor={id} className="Input-label">
+        {label}
+      </label>
+      <input
+        id={id}
+        value={value}
+        onChange={onChange}
+        className="Input"
+        {...props}
+      />
     </>
   );
 };

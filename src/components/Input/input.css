@@ -1,0 +1,11 @@
+.Input {
+  padding: 4px;
+  width: 200px;
+}
+
+.Input-label {
+  min-width: 150px;
+  display: block;
+  line-height: 1;
+  padding: 4px 0;
+}

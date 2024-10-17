@@ -1,6 +1,6 @@
 // import { within, userEvent, expect } from "@storybook/test";
 
-import { Password } from "./Password";
+import { Password } from "../components/Password";
 
 export default {
   title: "Example/Password",
@@ -12,8 +12,6 @@ export default {
   argTypes: {
     stringMap: { control: "object" },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  ///  args: { onClick: fn() },
 };
 
 export const DefaultExample = {};
@@ -21,26 +19,43 @@ export const DefaultExample = {};
 export const CustomStringMap = {
   args: {
     stringMap: {
+      alertDefault: "Por favor ingrese una contraseña.",
+      alertFail: "Tus contraseñas no son válidas!",
+      alertMatchFail: "Las contraseñas no coinciden.",
+      alertSuccess: "Tus contraseñas son válidas!",
       confirmPassword: "Confirmar Contraseña",
       password: "Contraseña",
-      passwordFail: "Tus contraseñas no son válidas!",
-      passwordSuccess: "Tus contraseñas son válidas!",
       requirements: "Requisitos",
+      showConfirmPassword: "Alternar Confirmar visibilidad de contraseña",
+      showPassword: "Alternar visibilidad de contraseña",
       submit: "Entregar",
     },
+    requirements: [
+      {
+        name: "length",
+        text: "6 caracteres mínimo.",
+        isValid: (value) => value.length > 6,
+      },
+      {
+        name: "upperCase",
+        text: "1 carácter en mayúscula.",
+        isValid: (value) => /[A-Z]/.test(value),
+      },
+      {
+        name: "lowerCase",
+        text: "1 carácter en minúscula.",
+        isValid: (value) => /[a-z]/.test(value),
+      },
+      {
+        name: "number",
+        text: "1 número.",
+        isValid: (value) => /\d/.test(value),
+      },
+      {
+        name: "special",
+        text: "1 carácter especial.",
+        isValid: (value) => /[*@!#%&()^~{}]+/.test(value),
+      },
+    ],
   },
 };
-
-// More on interaction testing: https://storybook.js.org/docs/writing-tests/interaction-testing
-// export const LoggedIn = {
-//   play: async ({ canvasElement }) => {
-//     const canvas = within(canvasElement);
-//     const loginButton = canvas.getByRole("button", { name: /Log in/i });
-//     await expect(loginButton).toBeInTheDocument();
-//     await userEvent.click(loginButton);
-//     await expect(loginButton).not.toBeInTheDocument();
-
-//     const logoutButton = canvas.getByRole("button", { name: /Log out/i });
-//     await expect(logoutButton).toBeInTheDocument();
-//   },
-// };
