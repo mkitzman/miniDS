@@ -66,8 +66,8 @@ export interface StringMapProps {
 }
 
 export const defaultStringMap = {
-  alertDefault: "Please enter a password.",
-  alertFail: "Passwords are not valid.",
+  alertDefault: "Enter a password.",
+  alertFail: "Password is not valid.",
   alertMatchFail: "Passwords do not match.",
   alertSuccess: "Success! Your passwords are valid.",
   confirmPassword: "Confirm Password",
@@ -156,93 +156,99 @@ export const Password = ({
 
   return (
     <form onSubmit={handleSubmit} className="Password">
-      <div
-        aria-live="assertive"
-        role="alert"
-        className={classNames({
-          "Password-notification": true,
-          "Password-notificationSuccess": arePasswordsValid && isFormSubmitted,
-          "Password-notificationFail": !arePasswordsValid && isFormSubmitted,
-        })}
-      >
-        {getNotificationContent()}
-      </div>
-      <div className="Password-row">
-        <div className="Password-cell">
-          <div className="Password-inputRow">
-            <Input
-              label={
-                <>
-                  <div>{stringMap.password}</div>
-                  <Button
-                    className="Password-visibilityButton"
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={stringMap.showPassword}
-                  >
-                    {showPassword ? IconVisible : IconVisibleOff}
-                  </Button>
-                </>
-              }
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                clearFormSubmitted();
-                setPassword(event.target.value);
-                // Realtime feedback on your passsword is more useful to the user vs typing two passwords and doing them both wrong and having to start over.
-                validatePassword(event.target.value);
-              }}
-            />
-          </div>
-          <div className="Password-inputRow">
-            <Input
-              label={
-                <>
-                  <div>{stringMap.confirmPassword}</div>
-                  <Button
-                    className="Password-visibilityButton"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    aria-label={stringMap.showConfirmPassword}
-                  >
-                    {showConfirmPassword ? IconVisible : IconVisibleOff}
-                  </Button>
-                </>
-              }
-              type={showConfirmPassword ? "text" : "password"}
-              value={confirmPassword}
-              onChange={(event) => {
-                clearFormSubmitted();
-                setConfirmPassword(event.target.value);
-              }}
-            />
-          </div>
-          <Button
-            type="submit"
-            variant="Primary"
-            className="Password-submitButton"
-          >
-            {stringMap.submit}
-          </Button>
+      <fieldset>
+        <legend className="visually-hidden">{stringMap.alertDefault}</legend>
+        <div
+          aria-live="assertive"
+          role="alert"
+          className={classNames({
+            "Password-notification": true,
+            "Password-notificationSuccess":
+              arePasswordsValid && isFormSubmitted,
+            "Password-notificationFail": !arePasswordsValid && isFormSubmitted,
+          })}
+        >
+          {getNotificationContent()}
         </div>
-        <div className="Password-cell">
-          {stringMap.requirements}
-          <ul className="Password-instructions">
-            {requirements.map((value) => {
-              const requirementPassed = passedChecks.includes(value.name);
-              return (
-                <li
-                  key={value.name}
-                  className={classNames({
-                    "Password-requirementValid": requirementPassed,
-                  })}
-                >
-                  {requirementPassed ? IconCheck : IconX}
-                  {value.text}
-                </li>
-              );
-            })}
-          </ul>
+        <div className="Password-row">
+          <div className="Password-cell">
+            <div className="Password-inputRow">
+              <Input
+                label={
+                  <>
+                    <div>{stringMap.password}</div>
+                    <Button
+                      className="Password-visibilityButton"
+                      onClick={() => setShowPassword(!showPassword)}
+                      aria-label={stringMap.showPassword}
+                    >
+                      {showPassword ? IconVisible : IconVisibleOff}
+                    </Button>
+                  </>
+                }
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  clearFormSubmitted();
+                  setPassword(event.target.value);
+                  // Realtime feedback on your passsword is more useful to the user vs typing two passwords and doing them both wrong and having to start over.
+                  validatePassword(event.target.value);
+                }}
+              />
+            </div>
+            <div className="Password-inputRow">
+              <Input
+                label={
+                  <>
+                    <div>{stringMap.confirmPassword}</div>
+                    <Button
+                      className="Password-visibilityButton"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      aria-label={stringMap.showConfirmPassword}
+                    >
+                      {showConfirmPassword ? IconVisible : IconVisibleOff}
+                    </Button>
+                  </>
+                }
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={(event) => {
+                  clearFormSubmitted();
+                  setConfirmPassword(event.target.value);
+                }}
+              />
+            </div>
+            <Button
+              type="submit"
+              variant="Primary"
+              className="Password-submitButton"
+            >
+              {stringMap.submit}
+            </Button>
+          </div>
+          <div className="Password-cell">
+            {stringMap.requirements}
+            <ul className="Password-instructions">
+              {requirements.map((value) => {
+                const requirementPassed = passedChecks.includes(value.name);
+                return (
+                  <li
+                    key={value.name}
+                    className={classNames({
+                      "Password-requirementValid": requirementPassed,
+                    })}
+                  >
+                    {requirementPassed ? IconCheck : IconX}
+                    {value.text}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
-      </div>
+      </fieldset>
     </form>
   );
 };

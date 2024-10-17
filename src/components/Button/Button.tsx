@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import "./button.css";
 
 export interface ButtonProps
@@ -19,17 +18,16 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const { className, ...buttonProps } = props;
+  const passedInClasses = className || "";
 
+  const classes =
+    variant === "Primary"
+      ? `Button Button-primary ${passedInClasses}`
+      : `Button ${passedInClasses}`;
+
+  // Spreading props on the button allows us to support the native HTML props without having to include them in the component
   return (
-    <button
-      type="button"
-      className={classNames({
-        Button: true,
-        "Button-primary": variant === "Primary",
-        className,
-      })}
-      {...buttonProps}
-    >
+    <button type="button" className={classes} {...buttonProps}>
       {children}
     </button>
   );
