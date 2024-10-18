@@ -24,6 +24,7 @@ export const CustomStringMap = {
       alertMatchFail: "Las contraseñas no coinciden.",
       alertSuccess: "Tus contraseñas son válidas!",
       confirmPassword: "Confirmar Contraseña",
+      fieldsetLegend: "Nuevos campos de contraseña",
       password: "Contraseña",
       requirements: "Requisitos",
       showConfirmPassword: "Alternar Confirmar visibilidad de contraseña",

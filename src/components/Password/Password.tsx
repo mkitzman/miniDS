@@ -9,7 +9,6 @@ import {
   IconVisibleOff,
   IconX,
 } from "../../assets/icon";
-import { string } from "prop-types";
 
 // This config object would be stored in some other file with other configs making it easy to edit without having to change component code.
 export interface PasswordRequirementProps {
@@ -58,6 +57,7 @@ export interface StringMapProps {
   alertMatchFail: string;
   alertSuccess: string;
   confirmPassword: string;
+  fieldsetLegend: string;
   password: string;
   requirements: string;
   showConfirmPassword: string;
@@ -71,6 +71,7 @@ export const defaultStringMap = {
   alertMatchFail: "Passwords do not match.",
   alertSuccess: "Success! Your passwords are valid.",
   confirmPassword: "Confirm Password",
+  fieldsetLegend: "New Password Fields",
   password: "Password",
   requirements: "Requirements",
   showConfirmPassword: "Toggle Confirm Password Visibility",
@@ -79,16 +80,19 @@ export const defaultStringMap = {
 };
 
 export interface PasswordProps {
+  /** Custom call back for when form is submitted, use to post form to desired endpoint */
+  onSubmit?: () => void;
   /** Config object for password requirements and text   */
-  requirements: PasswordRequirementProps[];
+  requirements?: PasswordRequirementProps[];
   /** String map for internationalization   */
-  stringMap: StringMapProps;
+  stringMap?: StringMapProps;
 }
 
 /**
  * Standalone Password Component . Includes several components that comprise a password and confirm password pattern including validation. Fully accessible.
  */
 export const Password = ({
+  onSubmit,
   stringMap = defaultStringMap,
   requirements = defaultRequirments,
 }: PasswordProps) => {
@@ -136,6 +140,7 @@ export const Password = ({
       password === confirmPassword
     ) {
       setArePasswordValid(true);
+      onSubmit && onSubmit();
     }
   };
 
@@ -157,7 +162,7 @@ export const Password = ({
   return (
     <form onSubmit={handleSubmit} className="Password">
       <fieldset>
-        <legend className="visually-hidden">{stringMap.alertDefault}</legend>
+        <legend className="visually-hidden">{stringMap.fieldsetLegend}</legend>
         <div
           aria-live="assertive"
           role="alert"

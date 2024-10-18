@@ -25,7 +25,7 @@ export const Button = ({
       ? `Button Button-primary ${passedInClasses}`
       : `Button ${passedInClasses}`;
 
-  // Spreading props on the button allows us to support the native HTML props without having to include them in the component
+  // Spreading props on the button allows us to support the native HTML props without having to manually include them in the props
   return (
     <button type="button" className={classes} {...buttonProps}>
       {children}

@@ -24,5 +24,7 @@ Example of a small library for a self contained password fields. Set up to work 
 
 ## Improvements
 
-- Aria live region doesn't always work perfectly
+- Variables in CSS should be moved to Design Tokens
 - Move the configs out of the password file
+- Aria live region doesn't always work perfectly
+- Add failed validations to aria live region but only for screen readers.
