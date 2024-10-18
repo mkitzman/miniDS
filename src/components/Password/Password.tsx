@@ -44,7 +44,7 @@ export const defaultRequirments: PasswordRequirementProps[] = [
   {
     name: "special",
     text: "1 special character.",
-    isValid: (value) => /[*@!#%&()^~{}]+/.test(value),
+    isValid: (value) => /[!@#$%^&*()_\-+={\[}\]|:;"'<,>.]/.test(value),
   },
 ];
 
