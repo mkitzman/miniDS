@@ -1,10 +1,13 @@
-# Small Mini DS Library
+# Small Mini Design System Library
 
-Example of a small library for a self contained password fields. Set up to work in Storybook.
+Example of a small component library with a self contained password fields. Set up to work in Storybook.
+
+<img width="649" alt="screenshot of app" src="https://github.com/user-attachments/assets/9689ca26-e9fa-4556-94f5-9c2d71c45b8e">
+
 
 ## View App
 
-[View app on netlify](https://mkitzman-password.netlify.app/)
+[View a live version of the app](https://mkitzman-password.netlify.app/)
 
 ## Running Locally
 
@@ -12,12 +15,15 @@ Example of a small library for a self contained password fields. Set up to work 
 
 `yarn storybook`
 
-**Run the frontend app proper on port 5173:**
+**Run the frontend app on port 5173:**
 
 `yarn dev`
 
 ## Features
 
+- Fully typed
+- Live validation of password
+- Also validates on submit.
 - Customizable text strings for internationalization.
 - Customizable validation rules.
 - Fully accessible including color ratio, keyboard access and aria live regions.
@@ -28,3 +34,5 @@ Example of a small library for a self contained password fields. Set up to work 
 - Move the configs out of the password file
 - Aria live region doesn't always work perfectly
 - Add failed validations to aria live region but only for screen readers.
+- Add tests
+- Add build process for exporting and making it usable.
